@@ -92,7 +92,7 @@ public class DoopCrawler extends WebCrawler {
 
 
             File file = new File(System.getProperty("user.dir")
-                    + "/PageRankInput.txt");
+                    + "/"+outputFile);
 
             // if file doesnt exists, then create it
             if (file.exists()) {
