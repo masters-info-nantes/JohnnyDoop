@@ -56,7 +56,7 @@ public class DoopCrawler extends WebCrawler {
     }
 
     public void crawl (String seed, String outputFile, int depth) {
-        String crawlStorageFolder = System.getProperty("user.dir") + "/_temp/";
+        String crawlStorageFolder = "../tmp";
         int numberOfCrawlers = 8;
 
         CrawlConfig config = new CrawlConfig();
@@ -72,8 +72,7 @@ public class DoopCrawler extends WebCrawler {
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller;
         try {
-            controller = new CrawlController(config, pageFetcher,
-                    robotstxtServer);
+            controller = new CrawlController(config, pageFetcher, robotstxtServer);
 
 
             controller.addSeed(seed);
@@ -87,12 +86,12 @@ public class DoopCrawler extends WebCrawler {
 
 
 
-            controller.start(DoopCrawler.class, numberOfCrawlers);
+            controller.start(this.getClass(), numberOfCrawlers);
 
 
 
             File file = new File(System.getProperty("user.dir")
-                    + "/PageRankInput.txt");
+                    + "/"+outputFile);
 
             // if file doesnt exists, then create it
             if (file.exists()) {

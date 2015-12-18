@@ -13,34 +13,28 @@ public class DoopMapper extends Mapper<LongWritable, Text, Text, Text> {
 
 
     @Override
-    public void map(LongWritable key, Text value, Context context)
-            throws IOException, InterruptedException {
+    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         int pageTabIndex = value.find("\t");
         int rankTabIndex = value.find("\t", pageTabIndex + 1);
 
-        //dans le cas ou il y'aurai une ligne vide dans le fichier
-        if(pageTabIndex == -1){
-            return;
-        }
+        //check for empty line
+        if(pageTabIndex == -1){return;}
 
-        // on récupère la page extraite
+        // get extracted page
         String page = Text.decode(value.getBytes(), 0, pageTabIndex);
 
-        // la page + le page rank
-        String pageWithRank = Text.decode(value.getBytes(), 0,
-                rankTabIndex + 1);
+        String pageWithRank = Text.decode(value.getBytes(), 0, rankTabIndex + 1);
 
         // on marque la page comme existante
         context.write(new Text(page), new Text("!"));
 
-        // on récupère la liste des liens
-        String links = Text.decode(value.getBytes(), rankTabIndex + 1,
-                value.getLength() - (rankTabIndex + 1));
+        // get links
+        String links = Text.decode(value.getBytes(), rankTabIndex + 1, value.getLength() - (rankTabIndex + 1));
 
-        // on récupère chaque page en découpant la ligne par virgule
+        // parse with colon
         String[] allOtherPages = links.split(",");
 
-        // on compte le nombre de lien sortant
+        // count ouput links
         int totalLinks = allOtherPages.length;
 
         for (String otherPage : allOtherPages) {

@@ -13,8 +13,8 @@ public class DoopReducer extends Reducer<Text, Text, Text, Text> {
     private static final float randomSurfer = 0.85F;
 
     @Override
-    public void reduce(Text page, Iterable<Text> values, Context context)
-            throws IOException, InterruptedException {
+    public void reduce(Text page, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+
         boolean isExistingPage = false;
         String[] split;
         float participantRank = 0;
@@ -34,6 +34,7 @@ public class DoopReducer extends Reducer<Text, Text, Text, Text> {
                 continue;
             }
 
+            //parse the file with tabulation
             split = pageWithRank.split("\t");
 
             float pageRank = Float.valueOf(split[1]);
