@@ -37,7 +37,7 @@ public class JohnnyDoop {
 
 
         FileInputFormat.setInputPaths(pageRankCalculation, new Path(inputFile));
-        FileOutputFormat.setOutputPath(pageRankCalculation, new Path("../"+outputFile+"/iter0"));
+        FileOutputFormat.setOutputPath(pageRankCalculation, new Path(outputFile+"/iter0"));
 
         pageRankCalculation.setMapperClass(DoopMapper.class);
         pageRankCalculation.setReducerClass(DoopReducer.class);
@@ -63,8 +63,8 @@ public class JohnnyDoop {
 
 
 
-            FileInputFormat.setInputPaths(pageRankCalculation, new Path("../"+outputFile+"/iter" + (i - 1)));
-            FileOutputFormat.setOutputPath(pageRankCalculation, new Path("../"+outputFile+"/iter" + i));
+            FileInputFormat.setInputPaths(pageRankCalculation, new Path(outputFile+"/iter" + (i - 1)));
+            FileOutputFormat.setOutputPath(pageRankCalculation, new Path(outputFile+"/iter" + i));
 
             pageRankCalculation.setMapperClass(DoopMapper.class);
             pageRankCalculation.setReducerClass(DoopReducer.class);

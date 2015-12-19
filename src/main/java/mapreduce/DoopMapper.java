@@ -25,7 +25,7 @@ public class DoopMapper extends Mapper<LongWritable, Text, Text, Text> {
 
         String pageWithRank = Text.decode(value.getBytes(), 0, rankTabIndex + 1);
 
-        // on marque la page comme existante
+        // mark as existing page
         context.write(new Text(page), new Text("!"));
 
         // get links
@@ -42,7 +42,6 @@ public class DoopMapper extends Mapper<LongWritable, Text, Text, Text> {
             context.write(new Text(otherPage), pageRankTotalLinks);
         }
 
-        // on récupère les liens pour la sortie
         context.write(new Text(page), new Text("|" + links));
     }
 }

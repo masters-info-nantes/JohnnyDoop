@@ -9,6 +9,7 @@ import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 import edu.uci.ics.crawler4j.url.WebURL;
+import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,8 +29,6 @@ public class DoopCrawler extends WebCrawler {
 
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
-            String text = htmlParseData.getText();
-            String html = htmlParseData.getHtml();
             Set<WebURL> links = htmlParseData.getOutgoingUrls();
             Boolean first = true;
 
@@ -90,13 +89,8 @@ public class DoopCrawler extends WebCrawler {
 
 
 
-            File file = new File(System.getProperty("user.dir")
-                    + "/"+outputFile);
-
-            // if file doesnt exists, then create it
-            if (file.exists()) {
-                file.delete();
-            }
+            File file = new File(System.getProperty("user.dir") + "/"+outputFile);
+            FileUtils.deleteDirectory(file);
 
             file.createNewFile();
 
@@ -106,7 +100,7 @@ public class DoopCrawler extends WebCrawler {
             bw.write(DoopCrawler.outputLines);
 
             bw.close();
-            System.out.println("Task done");
+            System.out.println("Finish");
         } catch (Exception e) {
 
             e.printStackTrace();

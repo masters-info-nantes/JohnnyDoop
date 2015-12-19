@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class DoopReducer extends Reducer<Text, Text, Text, Text> {
 
-    private static final float randomSurfer = 0.85F;
+    private static final float randomSurferSimulation = 0.85F;
 
     @Override
     public void reduce(Text page, Iterable<Text> values, Context context) throws IOException, InterruptedException {
@@ -46,7 +46,7 @@ public class DoopReducer extends Reducer<Text, Text, Text, Text> {
         if (!isExistingPage) {
             return;
         }
-        float newRank = (randomSurfer * participantRank) + (1 - randomSurfer);
+        float newRank = (randomSurferSimulation * participantRank) + (1 - randomSurferSimulation);
 
         context.write(page, new Text(newRank + links));
     }
