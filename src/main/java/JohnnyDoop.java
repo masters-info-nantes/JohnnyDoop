@@ -1,7 +1,6 @@
 import crawler.DoopCrawler;
 import mapreduce.DoopMapper;
 import mapreduce.DoopReducer;
-import org.apache.commons.io.FileUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
@@ -9,7 +8,6 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -24,8 +22,6 @@ public class JohnnyDoop {
 
 
     public void pageRank(String inputFile, String outputFile) throws IOException {
-        //Remove dir
-        FileUtils.deleteDirectory(new File(outputFile));
         Configuration conf = new Configuration();
 
         Job pageRankCalculation = Job.getInstance(conf, "JohnnyDoop");

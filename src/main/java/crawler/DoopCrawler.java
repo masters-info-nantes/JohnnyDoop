@@ -25,22 +25,19 @@ public class DoopCrawler extends WebCrawler {
 
     @Override
     public void visit(Page page) {
-        String url = page.getWebURL().getURL();
 
         if (page.getParseData() instanceof HtmlParseData) {
             HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
+            //List of outgoing links
             Set<WebURL> links = htmlParseData.getOutgoingUrls();
-            Boolean first = true;
+            boolean isTheFirstUrl = true;
 
-            outputLines += url;
-            System.out.println(url);
-            // rank set to 1
+            outputLines += page.getWebURL().getURL();
+            System.out.println(page.getWebURL().getURL());
             outputLines += "\t1\t";
-            // // nb of outgoing link
-            // outputLines += " " + links.size() + " ";
             for (WebURL webURL : links) {
-                if (first) {
-                    first = false;
+                if (isTheFirstUrl) {
+                    isTheFirstUrl = false;
                     // each outgoing link for url page key
                     outputLines += webURL.getURL();
                 } else {
@@ -90,7 +87,7 @@ public class DoopCrawler extends WebCrawler {
 
 
             File file = new File(System.getProperty("user.dir") + "/"+outputFile);
-            FileUtils.deleteDirectory(file);
+            FileUtils.forceDelete(file);
 
             file.createNewFile();
 
