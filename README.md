@@ -2,7 +2,7 @@
 
 Git clone this project
 
-Then go into the folder and type mvn install
+Then go into the folder and type <p>mvn clean install package</p>
 
 # Run
 
@@ -20,8 +20,7 @@ java -jar target/JohnnyDoop.jar -crawl 'http://mywebsite.com' 'myResults.txt' 'd
 
 To rank the links with the page rank algorithm using Hadoop, type:
 
-*mvn clean install package
-*java -jar target/JohnnyDoop.jar -rank myUrls.txt
+java -jar target/JohnnyDoop.jar -rank myUrls.txt
 
 ## Page Rank (Pig)
 To rank the links using Pig, type:
