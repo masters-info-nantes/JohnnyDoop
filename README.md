@@ -20,8 +20,8 @@ java -jar target/JohnnyDoop.jar -crawl 'http://mywebsite.com' 'myResults.txt' 'd
 
 To rank the links with the page rank algorithm using Hadoop, type:
 
--mvn clean install package
--java -jar target/JohnnyDoop.jar -rank myUrls.txt
+*mvn clean install package
+*java -jar target/JohnnyDoop.jar -rank myUrls.txt
 
 ## Page Rank (Pig)
 To rank the links using Pig, type:
